@@ -1,6 +1,10 @@
-require:
+# Default RuboCop configuration for plain Ruby projects at UB Paderborn.
+# Rails projects use rails.yml, which builds on this file.
+#
+# All cops use RuboCop's defaults unless configured below.
+
+plugins:
   - rubocop-performance
-  - rubocop-rails
   - rubocop-minitest
 
 inherit_mode:
@@ -8,36 +12,19 @@ inherit_mode:
     - Exclude
 
 AllCops:
+  # New cops are enabled when RuboCop is upgraded. Projects control upgrades
+  # through their Gemfile.lock.
+  NewCops: enable
   SuggestExtensions: false
-  DisabledByDefault: true
   Exclude:
     - "data/**/*"
-    - "public/**/*"
-    - "tmp/**/*"
     - "log/**/*"
     - "node_modules/**/*"
-    - "storage/**/*"
-
-# ----------------------------------------------------
-# Bundler cops
-# ----------------------------------------------------
-
-Bundler:
-  Enabled: true
-
-# ----------------------------------------------------
-# Gemspec cops
-# ----------------------------------------------------
-
-Gemspec:
-  Enabled: true
+    - "tmp/**/*"
 
 # ----------------------------------------------------
 # Layout cops
 # ----------------------------------------------------
-
-Layout:
-  Enabled: true
 
 # Allow empty lines around the body of a class except for the namespace.
 Layout/EmptyLinesAroundClassBody:
@@ -60,13 +47,6 @@ Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyleForEmptyBraces: no_space
 
 # ----------------------------------------------------
-# Lint cops
-# ----------------------------------------------------
-
-Lint:
-  Enabled: true
-
-# ----------------------------------------------------
 # Metrics cops
 # ----------------------------------------------------
 
@@ -74,38 +54,14 @@ Metrics:
   Enabled: false
 
 # ----------------------------------------------------
-# Migration cops
-# ----------------------------------------------------
-
-Migration:
-  Enabled: true
-
-# ----------------------------------------------------
-# Naming cops
-# ----------------------------------------------------
-
-Naming:
-  Enabled: true
-
-# ----------------------------------------------------
-# Security cops
-# ----------------------------------------------------
-
-Security:
-  Enabled: true
-
-# ----------------------------------------------------
 # Style cops
 # ----------------------------------------------------
-
-Style:
-  Enabled: true
 
 # We generally prefer &&/|| but like low-precedence and/or in context
 Style/AndOr:
   Enabled: false
 
-# Do now enforce documentation comments
+# Do not enforce documentation comments
 Style/Documentation:
   Enabled: false
 
@@ -135,12 +91,19 @@ Style/RedundantReturn:
 Style/Semicolon:
   AllowAsExpressionSeparator: true
 
-# Use `"foo"` not `'foo'` unless escaping is required
+# Use `"foo"` not `'foo'` unless escaping is required, also inside
+# interpolation.
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 
-# Use brackets for symbol arrays
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+# Use brackets for symbol and word arrays
 Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
   EnforcedStyle: brackets
 
 # ----------------------------------------------------
@@ -148,22 +111,5 @@ Style/SymbolArray:
 # ----------------------------------------------------
 
 Performance:
-  Enabled: true
   Exclude:
-    - "test/**/*"
-
-# ----------------------------------------------------
-# Rails cops
-# ----------------------------------------------------
-
-Rails:
-  Enabled: true
-
-# ----------------------------------------------------
-# Minitest cops
-# ----------------------------------------------------
-
-Minitest:
-  Enabled: true
-  Include:
     - "test/**/*"

@@ -1,3 +1,1 @@
-if defined?(Rails)
-  require "rubocop-ubpb/engine"
-end
+require "rubocop-ubpb/engine" if defined?(Rails)

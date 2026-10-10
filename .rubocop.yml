@@ -1,0 +1,15 @@
+inherit_from: ruby.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  Exclude:
+    # Fixtures contain offenses on purpose.
+    - "test/fixtures/**/*"
+
+# The entry file is named after the gem, so Bundler can require it.
+Naming/FileName:
+  Exclude:
+    - "lib/rubocop-ubpb.rb"

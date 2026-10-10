@@ -1,0 +1,9 @@
+# Default RuboCop configuration for Rails projects at UB Paderborn.
+# Builds on ruby.yml and adds the Rails cops.
+#
+# Requires `gem "rubocop-rails", require: false` in the project's Gemfile.
+
+inherit_from: ruby.yml
+
+plugins:
+  - rubocop-rails
